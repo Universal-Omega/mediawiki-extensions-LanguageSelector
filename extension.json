@@ -33,7 +33,7 @@
 			"scripts": [
 				"LanguageSelector.js"
 			]
-		},
+		}
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "",
