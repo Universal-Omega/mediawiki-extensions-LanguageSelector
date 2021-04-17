@@ -1,0 +1,61 @@
+{
+	"name": "Language Selector",
+	"version": "1.0.0",
+	"author": [
+		"Daniel Kinzler",
+		"Universal Omega"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:LanguageSelector",
+	"descriptionmsg": "languageselector-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "other",
+	"callback": "LanguageSelectorHooks::onRegistration",
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
+	},
+	"ExtensionFunctions": [
+		"LanguageSelectorHooks::extension"
+	],
+	"MessagesDirs": {
+		"LanguageSelector": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"LanguageSelectorHooks": "LanguageSelectorHooks.php"
+	},
+	"ResourceModules": {
+		"ext.languageSelector": {
+			"targets": [
+				"mobile",
+				"desktop"
+			],
+			"scripts": [
+				"LanguageSelector.js"
+			]
+		},
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "LanguageSelector"
+	},
+	"config": {
+		"LanguageSelectorLanguages": {
+			"value": null
+		},
+		"LanguageSelectorShowCode": {
+			"value": false
+		},
+		"LanguageSelectorShowAll": {
+			"value": false
+		}
+	},
+	"Hooks": {
+		"BeforePageDisplay": "LanguageSelectorHooks::onBeforePageDisplay",
+		"GetCacheVaryCookies": "LanguageSelectorHooks::onGetCacheVaryCookies",
+		"LocalUserCreated": "LanguageSelectorHooks::onLocalUserCreated",
+		"ParserFirstCallInit": "LanguageSelectorHooks::onParserFirstCallInit",
+		"UserGetLanguageObject": "LanguageSelectorHooks::onUserGetLanguageObject"
+	},
+	"manifest_version": 2
+}
