@@ -1,41 +1,17 @@
 <?php
-$wgExtensionCredits['other'][] = [
-	'path'           => __FILE__,
-	'name'           => 'Language Selector',
-	'author'         => 'Daniel Kinzler',
-	'url'            => 'https://mediawiki.org/wiki/Extension:LanguageSelector',
-	'descriptionmsg' => 'languageselector-desc',
-];
 
-/**
-* Languages to offer in the language selector. Per default, this includes all languages MediaWiki knows
-* about by virtue of languages/Names.php. A shorter list may be more usable, though.
-*/
-$wgLanguageSelectorLanguages = null;
+if ( function_exists( 'wfLoadExtension' ) ) {
+	wfLoadExtension( 'LanguageSelector' );
 
-/**
-* Determine if language codes are shown in the selector, in addition to names;
-*/
-$wgLanguageSelectorShowCode = false;
+	$wgMessagesDirs['LanguageSelector'] = __DIR__ . '/i18n';
 
-/**
- * Show all languages defined, not only those with a language file.
- */
-$wgLanguageSelectorShowAll = false;
+	wfWarn(
+		'Deprecated PHP entry point used for the LanguageSelector extension. ' .
+		'Please use wfLoadExtension() instead, ' .
+		'see https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Extension_registration for more details.'
+	);
 
-// register hook handlers
-$wgHooks['LocalUserCreated'][] = 'LanguageSelectorHooks::onLocalUserCreated';
-$wgHooks['BeforePageDisplay'][] = 'LanguageSelectorHooks::onBeforePageDisplay';
-$wgHooks['GetCacheVaryCookies'][] = 'LanguageSelectorHooks::onGetCacheVaryCookies';
-$wgHooks['ParserFirstCallInit'][] = 'LanguageSelectorHooks::onParserFirstCallInit';
-$wgHooks['UserGetLanguageObject'][] = 'LanguageSelectorHooks::onUserGetLanguageObject';
-
-$wgExtensionFunctions[] = 'LanguageSelectorHooks::extension';
-
-$wgResourceModules['ext.languageSelector'] = [
-	'scripts' => 'LanguageSelector.js',
-	'localBasePath' => __DIR__,
-	'remoteExtPath' => 'LanguageSelector'
-];
-
-$wgMessagesDirs['LanguageSelector'] = __DIR__ . '/i18n';
+	return;
+} else {
+	die( 'This version of the LanguageSelector extension requires MediaWiki 1.35+' );
+}
